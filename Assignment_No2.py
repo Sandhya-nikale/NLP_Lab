@@ -4,7 +4,7 @@
 #Roll No : 42
 #Assignment Title : Assignment to implement Bag of Words and TFIDF using Gensim library.
 import gensim
-from gensim import corpora
+from gensim import corpora,models
 from gensim.utils import simple_preprocess
 
 
@@ -36,14 +36,27 @@ print("Dictionary : ")
 for item in g_bow:
     print([[g_dict[id], freq] for id, freq in item])
 
-###OUTPUT###
-'''
-Output for Bag of words:
-The dictionary has: 20 tokens
-{'and': 0, 'but': 1, 'came': 2, 'class': 3, 'grow': 4, 'has': 5, 'have': 6, 'into': 7, 'is': 8, 'learn': 9, 'love': 10, 'me': 11, 'most': 12, 'shown': 13, 'the': 14, 'to': 15, 'touched': 16, 'what': 17, 'you': 18, 'your': 19}
-Bag of Words :  [[(0, 1), (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1), (11, 1), (12, 1), (13, 1), (14, 1), (15, 2), (16, 1), (17, 1), (18, 1), (19, 1)]]
+g_tfidf = models.TfidfModel(g_bow, smartirs='ntc')
 
-Output for TFIDF:
+print("\n TF-IDF Vector:")
+for item in g_tfidf[g_bow]:
+    print([[g_dict[id], np.around(freq, decimals=2)] for id, freq in item])
+
+''' 
+######### Bag Of Words ##########
+The dictionary has: 13 tokens
+{'and': 0, 'gave': 1, 'joy': 2, 'kind': 3, 'me': 4, 'mind': 5, 'of': 6, 'peace': 7, 're': 8, 'so': 9, 'teacher': 10, 'thank': 11, 'you': 12}
+
+
+Bag of Words :  [[(0, 1), (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1), (11, 1), (12, 3)]]
+
+########### TFIDF ##########
+
 Dictionary : 
-[['and', 1], ['but', 1], ['came', 1], ['class', 1], ['grow', 1], ['has', 1], ['have', 1], ['into', 1], ['is', 1], ['learn', 1], ['love', 1], ['me', 1], ['most', 1], ['shown', 1], ['the', 1], ['to', 2], ['touched', 1], ['what', 1], ['you', 1], ['your', 1]]
+[['and', 1], ['gave', 1], ['joy', 1], ['kind', 1], ['me', 1], ['mind', 1], ['of', 1], ['peace', 1], ['re', 1], ['so', 1], ['teacher', 1], ['thank', 1], ['you', 3]]
+
+########## TF-IDF Vector ########
+
+ TF-IDF Vector:
+[['and', 0.22], ['gave', 0.22], ['joy', 0.22], ['kind', 0.22], ['me', 0.22], ['mind', 0.22], ['of', 0.22], ['peace', 0.22], ['re', 0.22], ['so', 0.22], ['teacher', 0.22], ['thank', 0.22], ['you', 0.65]]
 '''
